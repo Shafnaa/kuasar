@@ -17,6 +17,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -82,9 +83,15 @@ function HomePage() {
         {error && <p>Error: {error.message}</p>}
         {loading && <p>Loading...</p>}
         {data && (
-          <div className="grid grid-cols-2 gap-2 md:grid-cols-6 md:gap-4">
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4">
             {data.countries.map(
-              (country: { code: string; emoji: string; name: string }) => (
+              (country: {
+                code: string;
+                emoji: string;
+                name: string;
+                capital: string;
+                currencies: string[];
+              }) => (
                 <NavLink
                   to={`/chat/${country.code}`}
                   className="flex flex-1"
@@ -96,7 +103,22 @@ function HomePage() {
                         {country.emoji}
                       </CardTitle>
                       <CardTitle>{country.name}</CardTitle>
-                      <CardDescription>{country.code}</CardDescription>
+                      <CardDescription className="flex flex-wrap gap-1">
+                        <Badge>{country.code}</Badge>
+                        {country.capital && (
+                          <Badge className="bg-blue-800">
+                            {country.capital}
+                          </Badge>
+                        )}
+                        {country.currencies.map(
+                          (currency) =>
+                            currency !== "" && (
+                              <Badge key={currency} className="bg-green-800">
+                                {currency}
+                              </Badge>
+                            )
+                        )}
+                      </CardDescription>
                     </CardHeader>
                   </Card>
                 </NavLink>
