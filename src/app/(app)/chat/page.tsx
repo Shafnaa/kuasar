@@ -50,7 +50,7 @@ function ChatPage() {
     setLoading(true);
 
     const response = await publicAxios.post("/chat", {
-      prompt: `I will give you my preference, please give me a list of country recommendation according to my preferences. ${data.prompt}. In the end, give me a list of country id separated by comma like this format [ID,AD,AE] inside a square bracket, no space, and no other text afterwards.`,
+      prompt: `Give me a list of country recommendation according to my preferences. In the end, give me a list of country id separated by comma like this format [ID,AD,AE] inside a square bracket, no space, and no other text afterwards. Here is the question: ${data.prompt}`,
     });
 
     setCountries(

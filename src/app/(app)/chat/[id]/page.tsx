@@ -52,7 +52,7 @@ function CountryPage() {
     setLoading(true);
 
     const response = await publicAxios.post("/chat", {
-      prompt: `All of the following question will be about ${country.data.country.name} as a country, place, and culture. Give me your best to answer my question. ${formData.prompt}`,
+      prompt: `All of the following question will be about ${country.data.country.name} as a country, place, and culture. Here is my question: ${formData.prompt}`,
     });
 
     setResponse(response.data.response);
